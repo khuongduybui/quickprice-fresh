@@ -1,4 +1,5 @@
 import type { Signal } from "@preact/signals";
+import { Icon } from "../components/Icon.tsx";
 import { Input } from "../components/Input.tsx";
 import numeral from "numeral";
 
@@ -48,6 +49,7 @@ export default function Counter(props: CounterProps) {
           props.buyingPrice.value = +((event.target as HTMLInputElement).value)}
         value={props.buyingPrice}
       >
+        <Icon name="tag" slot="prefix">$</Icon>
         <code slot="suffix">$</code>
       </Input>
       <Input
@@ -57,6 +59,7 @@ export default function Counter(props: CounterProps) {
           props.taxRate.value = +((event.target as HTMLInputElement).value)}
         value={props.taxRate}
       >
+        <Icon name="percent" slot="prefix">$</Icon>
         <code slot="suffix">%</code>
       </Input>
       <Input
@@ -66,10 +69,8 @@ export default function Counter(props: CounterProps) {
           props.capacity.value = +((event.target as HTMLInputElement).value)}
         value={props.capacity}
       >
+        <Icon name="flask" library="unicons" slot="prefix">$</Icon>
         <code slot="suffix">ml</code>
-      </Input>
-      <Input label="Giá gốc" filled readonly value={calculateCost(props)}>
-        <code slot="suffix">$</code>
       </Input>
       <Input
         type="number"
@@ -79,22 +80,17 @@ export default function Counter(props: CounterProps) {
             +((event.target as HTMLInputElement).value)}
         value={props.currencyRate}
       >
+        <Icon name="cash-coin" slot="prefix">$</Icon>
         <code slot="suffix">₫/$</code>
       </Input>
       <Input
-        label="Giá gốc"
-        filled
-        readonly
-        value={numeral(calculateCostInVnd(props)).format("0,0")}
-      >
-        <code slot="suffix">₫</code>
-      </Input>
-      <Input
         label="Giá sau cùng"
+        helpText="Đã bao gồm phụ thu hải quan và phí gởi theo cân nặng"
         filled
         readonly
         value={numeral(calculateFinalPriceInVnd(props)).format("0,0")}
       >
+        <Icon name="cash-stack" slot="prefix">$</Icon>
         <code slot="suffix">₫</code>
       </Input>
     </div>

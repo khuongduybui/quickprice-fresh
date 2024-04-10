@@ -12,7 +12,8 @@ registerIconLibrary("unicons", {
 
 await Promise.allSettled([
   // customElements.whenDefined("sl-button"),
-  // customElements.whenDefined("sl-icon"),
+  customElements.whenDefined("sl-icon"),
   customElements.whenDefined("sl-input"),
+  customElements.whenDefined("sl-textarea"),
 ]);
 document.body.classList.add("ready");

@@ -8,11 +8,16 @@ export default function Home() {
     capacity: useSignal(100),
     currencyRate: useSignal(24500),
   };
-  return <>
-    <header class="prose p-4">
-      <h1>Tính Giá Nhanh</h1>
-      <h2>Nước hoa</h2>
-    </header>
-    <Counter {...counterProps} />
-  </>;
+  return (
+    <>
+      <header class="prose p-4">
+        <h1>Tính Giá Nhanh</h1>
+        <h2>Nước hoa</h2>
+      </header>
+      <Counter {...counterProps} />
+      <footer class="p-4">
+        <sl-textarea label="Ghi chú" rows="1" resize="auto"></sl-textarea>
+      </footer>
+    </>
+  );
 }
