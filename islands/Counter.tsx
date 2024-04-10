@@ -3,6 +3,7 @@ import { computed } from "@preact/signals";
 import { Icon } from "../components/Icon.tsx";
 import { Input } from "../components/Input.tsx";
 import numeral from "numeral";
+import { debounce } from "underscore";
 
 export interface CounterProps {
   buyingPrice: Signal<number>;
@@ -48,14 +49,18 @@ export default function Counter(props: CounterProps) {
         currencyRate: props.currencyRate.value,
       }),
     });
-  }
+  };
   return (
     <div class="flex flex-col gap-4 p-4">
       <Input
         type="number"
         label="Giá mua"
-        onInput={(event: InputEvent) =>
-          props.buyingPrice.value = +((event.target as HTMLInputElement).value)}
+        onInput={debounce(
+          (event: InputEvent) =>
+            props.buyingPrice.value =
+              +((event.target as HTMLInputElement).value),
+          500,
+        )}
         value={props.buyingPrice}
       >
         <Icon name="tag" slot="prefix">$</Icon>
@@ -64,8 +69,11 @@ export default function Counter(props: CounterProps) {
       <Input
         type="number"
         label="Thuế"
-        onInput={(event: InputEvent) =>
-          props.taxRate.value = +((event.target as HTMLInputElement).value)}
+        onInput={debounce(
+          (event: InputEvent) =>
+            props.taxRate.value = +((event.target as HTMLInputElement).value),
+          500,
+        )}
         value={props.taxRate}
       >
         <Icon name="percent" slot="prefix">$</Icon>
@@ -74,8 +82,11 @@ export default function Counter(props: CounterProps) {
       <Input
         type="number"
         label="Dung tích"
-        onInput={(event: InputEvent) =>
-          props.capacity.value = +((event.target as HTMLInputElement).value)}
+        onInput={debounce(
+          (event: InputEvent) =>
+            props.capacity.value = +((event.target as HTMLInputElement).value),
+          500,
+        )}
         value={props.capacity}
       >
         <Icon name="flask" library="unicons" slot="prefix">$</Icon>
@@ -84,7 +95,7 @@ export default function Counter(props: CounterProps) {
       <Input
         type="number"
         label="Tỷ giá"
-        onInput={currentInputHandler}
+        onInput={debounce(currentInputHandler, 500)}
         value={props.currencyRate}
       >
         <Icon name="cash-coin" slot="prefix">$</Icon>

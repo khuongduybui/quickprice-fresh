@@ -32,6 +32,7 @@
     "tailwindcss/": "npm:/tailwindcss@3.4.1/",
     "@tailwindcss/typography": "npm:/@tailwindcss/typography@0.5.12",
     "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js",
+    "underscore": "https://underscorejs.org/underscore-esm-min.js",
     "$std/": "https://deno.land/std@0.216.0/"
   },
   "compilerOptions": {
