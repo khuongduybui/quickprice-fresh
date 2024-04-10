@@ -17,6 +17,7 @@
       ]
     }
   },
+  "unstable": ["kv"],
   "exclude": [
     "**/_fresh/*"
   ],

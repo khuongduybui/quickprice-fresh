@@ -15,17 +15,17 @@ export default function Counter(props: CounterProps) {
   const cost = computed(() => {
     const taxedPrice = props.buyingPrice.value *
       (1 + props.taxRate.value / 100);
-    console.log(`taxedPrice: ${taxedPrice}`);
+    // console.log(`taxedPrice: ${taxedPrice}`);
     const weightInOz = props.capacity.value / 6.25;
-    console.log(`weightInOz: ${weightInOz}`);
+    // console.log(`weightInOz: ${weightInOz}`);
     const weight = weightInOz / 16;
-    console.log(`weight: ${weight}`);
+    // console.log(`weight: ${weight}`);
     const freight = weight * 5; // TODO: freightRate
-    console.log(`freight: ${freight}`);
+    // console.log(`freight: ${freight}`);
     const custom = 6; // TODO: custom
-    console.log(`custom: ${custom}`);
+    // console.log(`custom: ${custom}`);
     const cost = taxedPrice + freight + custom;
-    console.log(`cost: ${cost}`);
+    // console.log(`cost: ${cost}`);
     return cost;
   });
   const finalPrice = computed(() => {
@@ -37,6 +37,18 @@ export default function Counter(props: CounterProps) {
   const finalPriceInVnd = computed(() =>
     numeral(finalPrice.value).format("0,0")
   );
+  const currentInputHandler = (event: InputEvent) => {
+    props.currencyRate.value = +((event.target as HTMLInputElement).value);
+    fetch("/api/preferences", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        currencyRate: props.currencyRate.value,
+      }),
+    });
+  }
   return (
     <div class="flex flex-col gap-4 p-4">
       <Input
@@ -72,9 +84,7 @@ export default function Counter(props: CounterProps) {
       <Input
         type="number"
         label="Tỷ giá"
-        onInput={(event: InputEvent) =>
-          props.currencyRate.value =
-            +((event.target as HTMLInputElement).value)}
+        onInput={currentInputHandler}
         value={props.currencyRate}
       >
         <Icon name="cash-coin" slot="prefix">$</Icon>
