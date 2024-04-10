@@ -15,7 +15,7 @@ export default function Home() {
         <h2>Nước hoa</h2>
       </header>
       <Counter {...counterProps} />
-      <footer class="p-4">
+      <footer class="px-4">
         <sl-textarea label="Ghi chú" rows="1" resize="auto"></sl-textarea>
       </footer>
     </>
