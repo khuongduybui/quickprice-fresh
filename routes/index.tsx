@@ -1,4 +1,4 @@
-import { effect, useSignal, useSignalEffect } from "@preact/signals";
+import { useSignal } from "@preact/signals";
 import Counter, { CounterProps } from "../islands/Counter.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
@@ -17,13 +17,15 @@ export const handler: Handlers<CounterPropsDefault> = {
       kv.get(["preferences", "currencyRate"]),
     ]);
     const defaultCounterProps = {
-      currencyRate: currencyRate.value,
+      currencyRate: currencyRate.value as number,
     };
     return ctx.render(defaultCounterProps);
   },
 };
 
-export default function Home(defaultCounterProps: PageProps<CounterPropsDefault>) {
+export default function Home(
+  defaultCounterProps: PageProps<CounterPropsDefault>,
+) {
   const counterProps: CounterProps = {
     buyingPrice: useSignal(100),
     taxRate: useSignal(6),

@@ -4,6 +4,7 @@ export interface SLIconAttributes {
   name: string;
   library?: string;
   slot?: string;
+  children?: string;
 }
 
 export function Icon(props: SLIconAttributes) {
